@@ -1,0 +1,49 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\f0\fs22\lang9                         \tab\tab vehicle routing and map navigation\par
+programme:\par
+import heapq\par
+\par
+def dijkstra(graph, start, goal):\par
+    queue = [(0, start)]\par
+    distances = \{node: float('inf') for node in graph\}\par
+    distances[start] = 0\par
+    shortest_path = \{start: None\}\par
+    \par
+    while queue:\par
+        current_distance, current_node = heapq.heappop(queue)\par
+        \par
+        if current_node == goal:\par
+            break\par
+        \par
+        for neighbor, weight in graph[current_node].items():\par
+            distance = current_distance + weight\par
+            if distance < distances[neighbor]:\par
+                distances[neighbor] = distance\par
+                shortest_path[neighbor] = current_node\par
+                heapq.heappush(queue, (distance, neighbor))\par
+    \par
+    path, node = [], goal\par
+    while node is not None:\par
+        path.insert(0, node)\par
+        node = shortest_path[node]\par
+    \par
+    return path, distances[goal]\par
+\par
+# Example usage:\par
+graph = \{\par
+    'A': \{'B': 2, 'C': 4\},\par
+    'B': \{'C': 1, 'D': 7\},\par
+    'C': \{'E': 3\},\par
+    'D': \{'E': 2\},\par
+    'E': \{\}\par
+\}\par
+\par
+route, cost = dijkstra(graph, 'A', 'E')\par
+print("Best Route:", route)\par
+print("Total Distance:", cost)\par
+\par
+output:\par
+Best Route: ['A', 'B', 'C', 'E']\par
+Total Distance: 6\par
+}
