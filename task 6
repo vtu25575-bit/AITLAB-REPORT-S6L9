@@ -1,0 +1,40 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\f0\fs22\lang9\tab\tab\tab Map Coloring problem\par
+\par
+Program:\par
+class Graph:\par
+ def __init__(self, vertices):\par
+ self.v = vertices\par
+ self.graph = [[0 for column in range(vertices)] for row in range(vertices)]\par
+ # A utility function to check if the current color assignment is safe for vertex v\par
+ def is_safe(self, v, color, c):\par
+ for i in range(self.v):\par
+ if self.graph[v][i] == 1 and color[i] == c:\par
+ return False\par
+ return True\par
+ # A recursive utility function to solve m-coloring problem\par
+ def graph_color_util(self, m, color, v):\par
+ if v == self.v:\par
+ return True\par
+ for c in range(1, m+1):\par
+ if self.is_safe(v, color, c):\par
+ color[v] = c\par
+ if self.graph_color_util(m, color, v+1):\par
+ return True\par
+ color[v] = 0\par
+ def graph_coloring(self, m):\par
+ color = [0] * self.v\par
+ if not self.graph_color_util(m, color, 0):\par
+ return False\par
+ # Print the solution\par
+ print("Solution exists and following are the assigned colors:")\par
+ for c in color:\par
+ print(c, end=" ")\par
+# Driver Code\par
+if __name__ == '__main__':\par
+ g = Graph(4)\par
+ g.graph = [[0, 1, 1, 1], [1, 0, 1, 0], [1, 1, 0, 1], [1, 0, 1, 0]]\par
+ m = 3\par
+ # Function call\par
+ g.graph_coloring(m)\par
