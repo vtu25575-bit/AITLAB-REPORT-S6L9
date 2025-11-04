@@ -1,0 +1,34 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\f0\fs22\lang9                                   Hill climbing algorithm for Heuristic search\par
+\par
+\par
+Program:\par
+from sys import maxsize\par
+from itertools import permutations\par
+V = 4\par
+def travellingSalesmanProblem(graph, s):\par
+ vertex = [] # Changed variable name to lowercase 'vertex'\par
+ for i in range(V): # Fixed capitalization of 'for'\par
+ if i != s: # Changed capitalization of 'if'\par
+ vertex.append(i)\par
+ min_path = maxsize # Changed variable name to lowercase 'min_path'\par
+ next_permutation = permutations(vertex) # Changed variable name to lowercase\par
+'next_permutation'\par
+ for i in next_permutation: # Fixed capitalization of 'for'\par
+ current_pathweight = 0 # Changed variable name to lowercase 'current_pathweight'\par
+ k = s # Changed variable name to lowercase 'k'\par
+ for j in i: # Fixed capitalization of 'for'\par
+ current_pathweight += graph[k][j]\par
+ k = j\par
+ current_pathweight += graph[k][s]\par
+ min_path = min(min_path, current_pathweight)\par
+ return min_path # Changed capitalization of 'return'\par
+if __name__ == "__main__":\par
+ graph = [[0, 10, 15, 20], [10, 0, 35, 25],\par
+ [15, 35, 0, 30], [20, 25, 30, 0]]\par
+ s = 0\par
+ print(travellingSalesmanProblem(graph, s)) # Changed capitalization of 'print'\par
+Output:\par
+ 80\par
+}
