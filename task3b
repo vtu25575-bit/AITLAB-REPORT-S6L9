@@ -1,0 +1,95 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\f0\fs22\lang9                                                    Simplified A* Algorithm\par
+\par
+Program:\par
+def aStarAlgo(start_node, stop_node):\par
+ open_set = set([start_node])\par
+ closed_set = set()\par
+ g = \{\} # store distance from starting node\par
+ parents = \{\} # parents contain an adjacency map of all nodes\par
+ # distance of starting node from itself is zero\par
+ g[start_node] = 0\par
+ # start_node is the root node, so it has no parent nodes\par
+ # so start_node is set to its own parent node\par
+ parents[start_node] = start_node\par
+ while len(open_set) > 0:\par
+ n = None\par
+ # node with the lowest f() is found\par
+ for v in open_set:\par
+ if n is None or g[v] + heuristic(v) < g[n] + heuristic(n):\par
+ n = v\par
+ if n == stop_node or n is None or n not in Graph_nodes:\par
+ break\par
+ else:\par
+ for m, weight in get_neighbors(n):\par
+ # nodes 'm' not in open_set and closed_set are added to open_set\par
+ # n is set as its parent\par
+ if m not in open_set and m not in closed_set:\par
+ open_set.add(m)\par
+ parents[m] = n\par
+ g[m] = g[n] + weight\par
+ # for each node m, compare its distance from start i.e g(m)\par
+ # to the from start through n node\par
+ else:\par
+ if g[m] > g[n] + weight:\par
+ # update g(m)\par
+ g[m] = g[n] + weight\par
+ # change parent of m to n\par
+ parents[m] = n\par
+ # if m is in closed_set, remove and add to open_set\par
+ if m in closed_set:\par
+ closed_set.remove(m)\par
+ open_set.add(m)\par
+ # remove n from the open_set and add it to closed_set\par
+ # because all of its neighbors were inspected\par
+ open_set.remove(n)\par
+ closed_set.add(n)\par
+ if n is None:\par
+ print('Path does not exist!')\par
+ return None\par
+ # if the current node is the stop_node,\par
+ # then we begin reconstructing the path from it to the start_node\par
+ if n == stop_node:\par
+ path = []\par
+ while parents[n] != n:\par
+ path.append(n)\par
+ n = parents[n]\par
+ path.append(start_node)\par
+ path.reverse()\par
+ print('Path found:', path)\par
+ return path\par
+ print('Path does not exist!')\par
+ return None\par
+# define function to return neighbors and their distances from the passed node\par
+def get_neighbors(v):\par
+ if v in Graph_nodes:\par
+ return Graph_nodes[v]\par
+ else:\par
+ return None\par
+# for simplicity, we'll consider heuristic distances given\par
+# and this function returns heuristic distance for all nodes\par
+def heuristic(n):\par
+ h_dist = \{\par
+ 'A': 11,\par
+ 'B': 6,\par
+ 'C': 99,\par
+ 'D': 1,\par
+ 'E': 7,\par
+ 'G': 0\par
+ \}\par
+ return h_dist[n]\par
+# Describe your graph here\par
+Graph_nodes = \{\par
+ 'A': [('B', 2), ('E', 3)],\par
+ 'B': [('A', 2), ('C', 1), ('G', 9)],\par
+ 'C': [('B', 1)],\par
+ 'D': [('E', 6), ('G', 1)],\par
+ 'E': [('A', 3), ('D', 6)],\par
+ 'G': [('B', 9), ('D', 1)]\par
+\}\par
+print("Following is the A* Algorithm:")\par
+aStarAlgo('A', 'G')\par
+Output:\par
+Path found: [\lquote A\rquote , \lquote E\rquote , \lquote D\rquote , \lquote G\rquote ]\par
+}
