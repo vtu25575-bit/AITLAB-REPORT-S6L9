@@ -1,0 +1,67 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\f0\fs22\lang9\tab\tab\tab\tab Chatbot system\par
+\par
+a. Simple ChatGPT using openai\par
+Code:\par
+Pip install openai\par
+import openai\par
+openai.api_key = "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"\par
+completion = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=[\{"role": "user",\par
+"content": "Give me 3 ideas that i could build using openai apis"\}])\par
+print(completion.choices[0].message.content)\par
+Output:\par
+1. Personalized Content Recommendation System: Develop an AI-powered content\par
+recommendation system that suggests personalized content to users based on their interests and\par
+search history. Use OpenAI's language generation APIs to generate relevant content\par
+descriptions and summaries, and employ their natural language processing (NLP) APIs to\par
+understand user preferences and interests.\par
+2. Intelligent Chatbot: Build a conversational AI-enabled chatbot that can answer customer\par
+queries, provide helpful recommendations, and complete transactions seamlessly. Use\par
+OpenAI's language processing APIs to train the chatbot to understand user inputs and respond\par
+in natural language. Integration with other APIs such as payment gateways and customer\par
+databases can make the chatbot efficient and effective.\par
+3. Fraud Detection System: Develop a machine learning model that can identify and prevent\par
+fraudulent activities using OpenAI's anomaly detection and classification APIs. Train the\par
+model using historical data of fraudulent transactions, and use the APIs to continuously scan\par
+for and identify suspicious activities. Such a system can be deployed in a range of applications\par
+such as finance or e-commerce platforms.\par
+b. ChatGPT Assistant using openai\par
+Code:\par
+import openai\par
+openai.api_key = "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"\par
+messages = []\par
+system_msg = input("What type of chatbot would you like to create?\\n")\par
+messages.append(\{"role": "system", "content": system_msg\})\par
+print("Your new assistant is ready! Type your query")\par
+while input != "quit()":\par
+ message = input()\par
+ messages.append(\{"role": "user", "content": message\})\par
+ response = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=messages)\par
+ reply = response["choices"][0]["message"]["content"]\par
+ messages.append(\{"role": "assistant", "content": reply\})\par
+ print("\\n" + reply + "\\n")\par
+Output:\par
+What type of chatbot would you like to create?\par
+Nila\rquote s personal chatbot\par
+(ctrl enter)\par
+Your new assistant is ready!\par
+c. CHATBOT CHAT ASSISTANT WEBSITE\par
+Code:\par
+import openai\par
+import gradio\par
+openai.api_key = "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"\par
+messages = [\{"role": "system", "content": "You are a financial experts that specializes in real\par
+estate investment and negotiation"\}]\par
+def CustomChatGPT(user_input):\par
+ messages.append(\{"role": "user", "content": user_input\})\par
+ response = openai.ChatCompletion.create(\par
+ model = "gpt-3.5-turbo",\par
+ messages = messages\par
+ )\par
+ ChatGPT_reply = response["choices"][0]["message"]["content"]\par
+ messages.append(\{"role": "assistant", "content": ChatGPT_reply\})\par
+ return ChatGPT_reply\par
+demo = gradio.Interface(fn=CustomChatGPT, inputs = "text", outputs = "text", title =\par
+"INTELLIGENT CHATBOT")\par
+demo.launch(share=True)\par
