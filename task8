@@ -1,0 +1,67 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\f0\fs22\lang9   \tab\tab N-queen problem using backtracking algorithm\par
+\par
+Program:\par
+# Python3 program to solve N Queen\par
+# Problem using backtracking\par
+global N\par
+N = 4\par
+def printSolution(board):\par
+for i in range(N):\par
+for j in range(N):\par
+if board[i][j] == 1:\par
+print("Q",end=" ")\par
+else:\par
+print(".",end=" ")\par
+print()\par
+def isSafe(board, row, col):\par
+# Check this row on left side\par
+for i in range(col):\par
+if board[row][i] == 1:\par
+return False\par
+# Check upper diagonal on left side\par
+for i, j in zip(range(row, -1, -1),\par
+range(col, -1, -1)):\par
+if board[i][j] == 1:\par
+return False\par
+# Check lower diagonal on left side\par
+for i, j in zip(range(row, N, 1),\par
+range(col, -1, -1)):\par
+if board[i][j] == 1:\par
+return False\par
+return True\par
+def solveNQUtil(board, col):\par
+# Base case: If all queens are placed\par
+# then return true\par
+if col >= N:\par
+return True\par
+# Consider this column and try placing\par
+# this queen in all rows one by one\par
+for i in range(N):\par
+if isSafe(board, i, col):\par
+# Place this queen in board[i][col]\par
+board[i][col] = 1\par
+if solveNQUtil(board, col + 1) == True:\par
+return True\par
+board[i][col] = 0\par
+return False\par
+def solveNQ():\par
+board = [[0, 0, 0, 0],\par
+[0, 0, 0, 0],\par
+[0, 0, 0, 0],\par
+[0, 0, 0, 0]]\par
+if solveNQUtil(board, 0) == False:\par
+print("Solution does not exist")\par
+return False\par
+printSolution(board)\par
+return True\par
+# Driver Code\par
+if __name__ == '__main__':\par
+solveNQ()\par
+Output:\par
+0 0 1 0\par
+1 0 0 0\par
+0 0 0 1\par
+0 1 0 0\par
+}
