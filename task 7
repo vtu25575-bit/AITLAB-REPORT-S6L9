@@ -1,0 +1,47 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\f0\fs22\lang9\tab\tab\tab Monkey Banana Problem\par
+\par
+Program:\par
+# Operators\par
+def move(subject, x1, x2):\par
+ return f"Move \{subject\} from \{x1\} to \{x2\}"\par
+def push_box(x1, x2):\par
+ return f"Push box from \{x1\} to \{x2\}"\par
+def climb_box(x, direction):\par
+ return f"Climb box at \{x\} \{direction\}"\par
+def have_banana(x):\par
+ return f"Have banana at \{x\}"\par
+# Initial State\par
+initial_state = \{\par
+ 'monkeyAt0': True,\par
+ 'monkeyLevel': 'Down',\par
+ 'bananaAt1': True,\par
+ 'boxAt2': True\par
+\}\par
+# Goal State\par
+goal_state = \{\par
+ 'GetBanana': True,\par
+ 'at': 1\par
+\}\par
+# Planning Algorithm\par
+def plan_actions(initial_state, goal_state):\par
+ actions = []\par
+ # Example planning algorithm to achieve the goal state\par
+ if initial_state['monkeyAt0'] and initial_state['bananaAt1']:\par
+ actions.append(move('Monkey', 0, 1))\par
+ actions.append(climb_box(1, 'Up'))\par
+ actions.append(have_banana(1))\par
+ return actions\par
+# Execute the planning algorithm\par
+actions = plan_actions(initial_state, goal_state)\par
+# Print the actions in the plan\par
+print("Plan:")\par
+for action in actions:\par
+ print(action)\par
+Output:\par
+Plan:\par
+Move Monkey from 0 to 1\par
+Climb box at 1 Up\par
+Have banana at 1\par
+}
