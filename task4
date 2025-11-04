@@ -1,0 +1,42 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\f0\fs22\lang9  \tab\tab\tab\tab Mini-Max algorithm\par
+\par
+Program:\par
+# Initial values of Alpha and Beta\par
+MAX, MIN = 1000, -1000\par
+# Returns optimal value for current player\par
+# (Initially called for root and maximizer)\par
+def minimax(depth, nodeIndex, maximizingPlayer, values, alpha, beta):\par
+ # Terminating condition. i.e. leaf node is reached\par
+ if depth == 3:\par
+ return values[nodeIndex]\par
+ if maximizingPlayer:\par
+ best = MIN\par
+ # Recur for left and right children\par
+ for i in range(0, 2):\par
+ val = minimax(depth + 1, nodeIndex * 2 + i, False, values, alpha, beta)\par
+ best = max(best, val)\par
+ alpha = max(alpha, best)\par
+ # Alpha Beta Pruning\par
+ if beta <= alpha:\par
+ break\par
+ return best\par
+ else:\par
+ best = MAX\par
+ # Recur for left and right children\par
+ for i in range(0, 2):\par
+ val = minimax(depth + 1, nodeIndex * 2 + i, True, values, alpha, beta)\par
+ best = min(best, val)\par
+ beta = min(beta, best)\par
+ # Alpha Beta Pruning\par
+ if beta <= alpha:\par
+ break\par
+ return best\par
+# Driver Code\par
+if __name__ == "__main__":\par
+ values = [3, 5, 6, 9, 1, 2, 0, -1]\par
+ print("The optimal value is:", minimax(0, 0, True, values, MIN, MAX))\par
+ output :\par
+The optimal value is :5\par
+}
