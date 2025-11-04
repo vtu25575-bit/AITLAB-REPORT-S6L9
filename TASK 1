@@ -1,0 +1,41 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil Calibri;}}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\f0\fs22\lang9\tab\tab\tab Implement simple facts using python\par
+\par
+Program:\par
+# Define a list of facts\par
+facts = [\par
+ "john_is_cold.", # john is cold\par
+ "raining.", # it is raining\par
+ "john_Forgot_His_Raincoat.", # john forgot his raincoat\par
+ "fred_lost_his_car_keys.", # fred lost his car keys\par
+ "peter_footballer." # peter plays football\par
+]\par
+# Function to check if a fact is true\par
+def verify_fact(fact):\par
+ # Remove the trailing period\par
+ fact = fact.rstrip(".")\par
+ # Perform some logic to verify the fact\par
+ if fact == "john_Forgot_His_Raincoat":\par
+ return True\par
+ elif fact == "raining":\par
+ return True\par
+ elif fact == "foggy":\par
+ return True\par
+ elif fact == "Cloudy":\par
+ return False # Assume it's not cloudy\par
+ else:\par
+ return False\par
+# Verify each fact\par
+for fact in facts:\par
+ if verify_fact(fact):\par
+ print(f"\{fact\} - Yes")\par
+ else:\par
+ print(f"\{fact\} - No")\par
+Output:\par
+john_is_cold. - No\par
+raining. - Yes\par
+john_Forgot_His_Raincoat. - Yes\par
+fred_lost_his_car_keys. - No\par
+peter_footballer. \f1\endash  No\f0\par
+}
